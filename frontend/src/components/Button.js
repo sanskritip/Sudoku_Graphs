@@ -1,11 +1,10 @@
 import React from 'react';
 
-function Button ({text}) {
-    const handleClick = () => {}
+function Button ({text,onClick}) {
     return (
 
             <a
-                onClick = {handleClick}
+                onClick = {onClick}
                 className = "button"
             >
                 {text}
