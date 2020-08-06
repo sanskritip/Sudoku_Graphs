@@ -6,7 +6,7 @@ import c_utils
 app = FastAPI()
 
 app.add_middleware(CORSMiddleware,allow_origins=['*'])
-app.mount("/",StaticFiles( directory = "frontend/public" ),name = "static")
+#app.mount("/",StaticFiles( directory = "frontend/public" ),name = "static")
 
 @app.get("/api/test")
 def home():

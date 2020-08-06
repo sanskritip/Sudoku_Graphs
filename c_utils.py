@@ -1,6 +1,6 @@
 from ctypes import *
 
-so_file = r'/home/avinashvk/Desktop/Sudoku_Graphs/solver.so'
+so_file = './solver.so'
 sudoku_functions = CDLL(so_file)
 
 def generate_grid():
