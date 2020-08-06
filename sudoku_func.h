@@ -207,7 +207,7 @@ void randomize(int arr[], int n) {
         swap(&arr[i], &arr[j]);
     }
 }
-int random(int min, int max){
+int randomi(int min, int max){
    return min + rand() / (RAND_MAX / (max - min + 1) + 1);
 }
 bool UsedInBox( int grid[9][9], int boxStartRow,int boxStartCol, int num) 
@@ -337,12 +337,12 @@ void generator_main(int grid[9][9])
     int attempts=40;
     while(attempts>0)
     {   //printf("Starting attempt %d \n",attempts); 
-        int row=random(0,8);
-        int col=random(0,8);
+        int row=randomi(0,8);
+        int col=randomi(0,8);
         while(grid[row][col]==0)
         {
-            row=random(0,8);
-            col=random(0,8);
+            row=randomi(0,8);
+            col=randomi(0,8);
         }
         int backup=grid[row][col];
         grid[row][col]=0;
