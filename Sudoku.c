@@ -1,36 +1,21 @@
-#include <stdbool.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include <string.h>
 #include "sudoku_func.h"
-
-
-int main()
-{
+int main(){
+    int grid[9][9]={0};
+    generator_main(grid);
+    printf("Generated 2D Array Puzzle with 40 empty cells \n");
+    print(grid);
     Sudoku* sudoku = initialize_board(); 
     int d,i,j;
-    FILE *fp;
-    fp = fopen(puzzle,"r");
-
     for(i=0;i<size;i++)
     {
         for(j=0;j<size;j++)
         {
-            fscanf(fp,"%d",&d);
-            sudoku->vertices[i][j]->value = d;
+            sudoku->vertices[i][j]->value = grid[i][j];
         }
     }
-    printf("\n PUZZLE :\n");
+    solve_Sudoku(sudoku);
+    printf("Puzzle solved using graphs\n");
     display_board(sudoku);
 
-    if(solve_Sudoku(sudoku))
-    {
-        printf("\n SOLUTION :\n");
-        display_board(sudoku);
-    }
-    else
-    {
-        printf("No solution exists..");
-    }
+    return 0;
 }
