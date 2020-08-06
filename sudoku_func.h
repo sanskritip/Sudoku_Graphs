@@ -24,7 +24,7 @@ Sudoku* initialize_board();
 int isSolvedPuzzle(Sudoku* sudoku);
 int check(Sudoku* sudoku,int choice,int i,int j);
 void recurse_Sudoku(Sudoku* sudoku);
-int generator_solve_Sudoku(int grid[9][9]);
+void generator_solve_Sudoku(int grid[9][9]);
 void display_board(Sudoku* sudoku);
 int solve_Sudoku(Sudoku* sudoku);
 //Function Definition
@@ -129,8 +129,8 @@ void recurse_Sudoku(Sudoku* sudoku){
     }
 }
 
-int generator_solve_Sudoku(int arr[9][9])
-{   printf("In generator solver \n");
+void generator_solve_Sudoku(int arr[9][9])
+{   //printf("In generator solver \n");
     Sudoku* sudoku = initialize_board(); 
     int d,i,j;
     for(i=0;i<size;i++)
@@ -143,10 +143,9 @@ int generator_solve_Sudoku(int arr[9][9])
     counter = 0;
     recurse_Sudoku(sudoku);
     free(sudoku);
-    return counter;
 }
 void display_board(Sudoku* sudoku)
-{	 printf("\n_________________________\n");
+{	printf("\n_________________________\n");
     int space = pow(size,0.5);
     int i,j;
     for(i=0;i<size;i++)
@@ -209,7 +208,6 @@ void randomize(int arr[], int n) {
     }
 }
 int random(int min, int max){
-   srand(time(NULL));
    return min + rand() / (RAND_MAX / (max - min + 1) + 1);
 }
 bool UsedInBox( int grid[9][9], int boxStartRow,int boxStartCol, int num) 
@@ -232,12 +230,24 @@ bool checkgrid(int grid[9][9])
 }
 void print(int arr[9][9]) 
 { 
-    int i, j; 
-    for (i = 0; i < 9; i++) 
-    {
-      for (j = 0; j < 9; j++) 
-        printf("%d ", arr[i][j]); 
-      printf("\n");
+    printf("\n_________________________\n");
+    int space = pow(size,0.5);
+    int i,j;
+    for(i=0;i<size;i++)
+    {   printf("|");
+    	for(j = 0;j<size;j++)
+        {
+            printf("%d ",arr[i][j]);
+            if (j%space==space-1)
+            {            
+                printf(" |");
+            }
+        }
+        if (i%space==space-1)
+        {       printf("\n_________________________\n");
+                
+        }
+        printf("\n");
     }
       
 } 
@@ -324,9 +334,9 @@ void generator_main(int grid[9][9])
     bool temp=fillgrid(grid);
     printf("Completed puzzle \n");
     print(grid);
-    int attempts=5;
+    int attempts=40;
     while(attempts>0)
-    {   
+    {   //printf("Starting attempt %d \n",attempts); 
         int row=random(0,8);
         int col=random(0,8);
         while(grid[row][col]==0)
@@ -336,14 +346,13 @@ void generator_main(int grid[9][9])
         }
         int backup=grid[row][col];
         grid[row][col]=0;
-        int cur_counter;
-        cur_counter=generator_solve_Sudoku(grid);
-        printf("%d Counter value \n",cur_counter);
-        if(cur_counter!=1)
+        generator_solve_Sudoku(grid);
+        //printf("%d Counter value \n",counter);
+        if(counter!=1)
             grid[row][col]=backup;
         else
             attempts--;
-            printf("Puzzle state after attempt %d \n",5-attempts);
-            print(grid);
+            //printf("Puzzle state after attempt %d \n",5-attempts);
+            //print(grid);
     }    
 }
