@@ -17,4 +17,8 @@ def generate_sudoku():
     grid = c_utils.generate_grid()
     return { "data" : str(grid) }
 
-
+'''
+@app.get("/api/solution")
+def solve_sudoku(grid):
+    print(grid)
+'''
