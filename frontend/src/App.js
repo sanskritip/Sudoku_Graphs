@@ -17,7 +17,15 @@ class App extends React.Component {
       editGrid:editGrid
     })
   }
-  
+
+  handleSolve = async () =>{
+    var resp = await API.solve_puzzle(this.state.grid)
+      console.log("I AM HERE",resp)
+      this.setState({
+        editGrid:resp,
+      });
+  }
+
   handleGenerate = async () =>{
     var resp = await API.generate_puzzle()
    
@@ -44,7 +52,7 @@ class App extends React.Component {
           <div className="button-container">
             <Button text = "Generate puzzle" onClick = {this.handleGenerate} />
             <Button text = "Scan puzzle" />
-            <Button text = "Solve puzzle" />
+            <Button text = "Solve puzzle" onClick = {this.handleSolve} />
           </div>
         </gameContext.Provider>
       </div>
